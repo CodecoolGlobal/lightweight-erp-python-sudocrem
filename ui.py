@@ -111,7 +111,10 @@ def print_menu(title, list_options, exit_message):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    print(f"{title}: ")
+    for index, list_option in enumerate(list_options, start = 1):
+        print(f"    ({index}) {list_option}")
+    print(f"    (0) {exit_message}")
 
 
 def get_inputs(list_labels, title):
