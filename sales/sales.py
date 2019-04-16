@@ -30,7 +30,8 @@ def start_module():
     """
 
     menu = ['Display table', 'Add', 'Remove', 'Update']
-    table = data_manager.get_table_from_file('sales/sales.csv')
+    file_name = 'sales/sales.csv'
+    table = data_manager.get_table_from_file(file_name)
     while True:
         ui.print_menu(
             'Sales',
@@ -48,6 +49,7 @@ def start_module():
         elif sales_input[0] == '4':
             table = update(table, ui.get_inputs(['ID'], "Updating")[0])
 
+        data_manager.write_table_to_file(file_name, table)
 
 def show_table(table):
     """
