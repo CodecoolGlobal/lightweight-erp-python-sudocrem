@@ -75,9 +75,8 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
-    return table
+    title_list = ['Title:', 'Price:', 'Month:', 'Day:', 'Year:']
+    return common.add(table, title_list)
 
 
 def remove(table, id_):
