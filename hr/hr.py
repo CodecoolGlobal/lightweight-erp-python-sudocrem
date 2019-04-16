@@ -29,10 +29,10 @@ def start_module():
     """
 
     menu = ['Display table', 'Add', 'Remove', 'Update']
-    table = data_manager.get_table_from_file('crm/customers.csv')
+    table = data_manager.get_table_from_file('hr/persons.csv')
     while True:
         ui.print_menu(
-            'Human resources (HR)',
+            'Human resources manager',
             menu,
             'Go back to main menu')
         crm_input = ui.get_inputs(["Please enter a number:"], "")
