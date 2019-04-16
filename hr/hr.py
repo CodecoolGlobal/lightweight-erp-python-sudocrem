@@ -29,11 +29,11 @@ def start_module():
     """
 
     menu = ['Display table', 'Add', 'Remove', 'Update']
-
     file_name = 'hr/persons.csv'
-    table = data_manager.get_table_from_file(file_name)
 
     while True:
+        table = data_manager.get_table_from_file(file_name)
+
         ui.print_menu(
             'Human resources manager',
             menu,
