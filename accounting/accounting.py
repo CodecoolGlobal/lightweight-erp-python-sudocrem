@@ -36,7 +36,7 @@ def start_module():
     (3): Remove from table
     (4): Update table
     """
-    table = data_manager.get_table_from_file("items.csv")
+    table = data_manager.get_table_from_file("accounting/items.csv")
     accounting_options = [
         "Show table",
         "Add to table",
@@ -162,6 +162,3 @@ def avg_amount(table, year):
     """
 
     # your code
-
-
-start_module()
