@@ -15,6 +15,8 @@ import data_manager
 # common module
 import common
 
+titles = ['Name', 'Birth year']
+
 
 def start_module():
     """
@@ -57,7 +59,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ["ID"] + titles
+    common.show_table(table, title_list)
 
 
 def add(table):
