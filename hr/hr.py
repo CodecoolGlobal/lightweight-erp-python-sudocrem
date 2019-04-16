@@ -15,6 +15,8 @@ import data_manager
 # common module
 import common
 
+titles = ['Name', 'Birth year']
+
 
 def start_module():
     """
@@ -26,7 +28,29 @@ def start_module():
         None
     """
 
-    # your code
+    menu = ['Display table', 'Add', 'Remove', 'Update']
+    file_name = 'hr/persons.csv'
+
+    while True:
+        table = data_manager.get_table_from_file(file_name)
+
+        ui.print_menu(
+            'Human resources manager',
+            menu,
+            'Go back to main menu')
+        crm_input = ui.get_inputs(["Please enter a number:"], "")
+        if crm_input[0] == '0':
+            return None
+        elif crm_input[0] == '1':
+            show_table(table)
+        elif crm_input[0] == '2':
+            table = add(table)
+        elif crm_input[0] == '3':
+            table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
+        elif crm_input[0] == '4':
+            table = update(table, ui.get_inputs(['ID'], "Updating")[0])
+
+        data_manager.write_table_to_file(file_name, table)
 
 
 def show_table(table):
@@ -40,7 +64,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ["ID"] + titles
+    common.show_table(table, title_list)
 
 
 def add(table):
@@ -54,9 +79,7 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
-    return table
+    return common.add(table, titles)
 
 
 def remove(table, id_):
@@ -71,9 +94,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
-
-    return table
+    return common.remove(table, id_)
 
 
 def update(table, id_):
@@ -88,9 +109,7 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
-
-    return table
+    return common.update(table, id_, titles)
 
 
 # special functions:

@@ -37,7 +37,8 @@ def generate_random(table):
         if not (generated in keys):
             generated_in_keys = False
 
-    return generated
+    shuffled = ''.join(random.sample(generated, len(generated)))
+    return shuffled
 
 
 def show_table(table, title_list):
