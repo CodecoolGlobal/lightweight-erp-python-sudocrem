@@ -127,7 +127,7 @@ def get_oldest_person(table):
         list: A list of strings (name or names if there are two more with the same value)
     """
     min_birth_year = min(int(person[BIRTH]) for person in table)
-    return [person[NAME] for person in table if person[BIRTH] == min_birth_year]
+    return [person[NAME] for person in table if int(person[BIRTH]) == min_birth_year]
 
 
 def get_persons_closest_to_average(table):
