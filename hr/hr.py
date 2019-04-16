@@ -15,7 +15,7 @@ import data_manager
 # common module
 import common
 
-titles = ['Name', 'Birth year']
+TITLES = ['Name', 'Birth year']
 NAME, BIRTH = (1, 2)
 
 
@@ -65,7 +65,7 @@ def show_table(table):
         None
     """
 
-    title_list = ["ID"] + titles
+    title_list = ["ID"] + TITLES
     common.show_table(table, title_list)
 
 
@@ -80,7 +80,7 @@ def add(table):
         list: Table with a new record
     """
 
-    return common.add(table, titles)
+    return common.add(table, TITLES)
 
 
 def remove(table, id_):
@@ -110,7 +110,7 @@ def update(table, id_):
         list: table with updated record
     """
 
-    return common.update(table, id_, titles)
+    return common.update(table, id_, TITLES)
 
 
 # special functions:
