@@ -3,6 +3,7 @@ implement commonly used functions here
 """
 
 import random
+import ui
 
 
 def get_random_char_between(letter_1, letter_2):
@@ -37,3 +38,38 @@ def generate_random(table):
             generated_in_keys = False
 
     return generated
+
+
+def show_table(table, title_list):
+    ui.print_table(table, title_list)
+
+
+def add(table, title_list):
+    new_record = []
+    new_record.append(generate_random(table))
+    new_record.extend(ui.get_inputs(title_list, 'Enter new record'))
+    table.append(new_record)
+    return table
+
+
+def remove(table, id_):
+    for element in table:
+        if element[0] == id_:
+            table.remove(element)
+    return table
+
+
+
+def update(table, id_, title_list):
+    return_element = []
+    for element in table:
+        if element[0] == id_:
+            return_element.append(element[0])
+            return_element.extend(ui.get_inputs(title_list, 'Update record'))
+            for index, data in enumerate(return_element):
+                if not data:
+                    data = element[index]
+            table.remove(element)
+            break
+    table.append(return_element)
+    return table

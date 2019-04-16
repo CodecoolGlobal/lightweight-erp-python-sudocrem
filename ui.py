@@ -63,7 +63,8 @@ def print_table(table, title_list):
             break
         print(f"|{'|'.join(sep_lines)}|")
     # Print footer
-    print(closing_string) 
+    print(closing_string)
+    print()
 
 
 def print_result(result, label):
@@ -88,6 +89,7 @@ def print_result(result, label):
             print(f"{key} : {result[key]}")
     else:
         pass
+    print()
 
 
 def print_menu(title, list_options, exit_message):
@@ -115,6 +117,7 @@ def print_menu(title, list_options, exit_message):
     for index, list_option in enumerate(list_options, start = 1):
         print(f"    ({index}) {list_option}")
     print(f"    (0) {exit_message}")
+    print()
 
 
 def get_inputs(list_labels, title):
@@ -140,7 +143,7 @@ def get_inputs(list_labels, title):
 
     print(title)
     for label in list_labels:
-        inputs.append(input(f"{label}: "))
+        inputs.append(input(f"{label} "))
 
     return inputs
 
@@ -157,3 +160,4 @@ def print_error_message(message):
     """
 
     print(f"Error: {message}")
+    print()

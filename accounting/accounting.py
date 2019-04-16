@@ -28,8 +28,44 @@ def start_module():
     Returns:
         None
     """
-
     # you code
+    """
+    (0): Go back to menu
+    (1): Show table
+    (2): Add to table
+    (3): Remove from table
+    (4): Update table
+    """
+    table = data_manager.get_table_from_file("accounting/items.csv")
+    accounting_options = [
+        "Show table",
+        "Add to table",
+        "Remove from table",
+        "Update table"]
+    ui.print_menu("Accounting menu:", accounting_options, "Go back to main menu:")
+    inputs = ui.get_inputs(["Please enter a number: "], "")
+    option = inputs[0]
+    if option == "1":
+        show_table(table)
+        start_module()
+    elif option == "2":
+        add(table)
+        start_module()
+    elif option == "3":
+        get_id = ui.get_inputs(["Please enter an ID to remove: "], "")
+        id_ = get_id[0]
+        remove(table, id_)
+        start_module()
+    elif option == "4":
+        get_id = ui.get_inputs(["Please enter an ID to update: "], "")
+        id_ = get_id[0]
+        update(table, id_)
+        start_module()
+    elif option == "0":
+
+        return None
+    else:
+        raise KeyError("There is no such option.")
 
 
 def show_table(table):
