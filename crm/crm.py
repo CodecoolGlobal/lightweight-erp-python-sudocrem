@@ -68,10 +68,8 @@ def add(table):
     Returns:
         list: Table with a new record
     """
-    title_list = ['ID:', 'Name:', 'Email:', 'Subscribed:']
-    new_record = ui.get_inputs(title_list, 'Enter new record')
-    table.append(new_record)
-    return table
+    title_list = ['Name:', 'Email:', 'Subscribed:']
+    return common.add(table,title_list)
 
 
 def remove(table, id_):
@@ -86,7 +84,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    # your code
+    
 
     return table
 

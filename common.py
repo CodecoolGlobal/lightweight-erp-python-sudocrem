@@ -3,6 +3,7 @@ implement commonly used functions here
 """
 
 import random
+import ui
 
 
 def get_random_char_between(letter_1, letter_2):
@@ -41,3 +42,11 @@ def generate_random(table):
 
 def show_table(table, title_list):
     ui.print_table(table, title_list)
+
+
+def add(table, title_list):
+    new_record = []
+    new_record.append(generate_random(table))
+    new_record.extend(ui.get_inputs(title_list, 'Enter new record'))
+    table.append(new_record)
+    return table
