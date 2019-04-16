@@ -29,7 +29,10 @@ def start_module():
     """
 
     menu = ['Display table', 'Add', 'Remove', 'Update']
-    table = data_manager.get_table_from_file('hr/persons.csv')
+
+    file_name = 'hr/persons.csv'
+    table = data_manager.get_table_from_file(file_name)
+
     while True:
         ui.print_menu(
             'Human resources manager',
@@ -46,6 +49,8 @@ def start_module():
             table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
         elif crm_input[0] == '4':
             table = update(table, ui.get_inputs(['ID'], "Updating")[0])
+
+        data_manager.write_table_to_file(file_name, table)
 
 
 def show_table(table):
