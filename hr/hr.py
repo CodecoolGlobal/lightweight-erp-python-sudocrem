@@ -26,7 +26,24 @@ def start_module():
         None
     """
 
-    # your code
+    menu = ['Display table', 'Add', 'Remove', 'Update']
+    table = data_manager.get_table_from_file('crm/customers.csv')
+    while True:
+        ui.print_menu(
+            'Human resources (HR)',
+            menu,
+            'Go back to main menu')
+        crm_input = ui.get_inputs(["Please enter a number:"], "")
+        if crm_input[0] == '0':
+            return None
+        elif crm_input[0] == '1':
+            show_table(table)
+        elif crm_input[0] == '2':
+            table = add(table)
+        elif crm_input[0] == '3':
+            table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
+        elif crm_input[0] == '4':
+            table = update(table, ui.get_inputs(['ID'], "Updating")[0])
 
 
 def show_table(table):
