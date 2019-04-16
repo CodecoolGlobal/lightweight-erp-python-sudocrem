@@ -21,8 +21,49 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
-    # your goes code
+    # Get longest elements of each column
+    columns = len(table[0])
+    longest_elements = [0] * columns
+    for column in range(columns):
+        max_column_length = 0
+        for line in table:
+            column_element = line[column]
+            if len(column_element) > max_column_length:
+                max_column_length = len(column_element)
+        # Handle long headers
+        if max_column_length < len(title_list[column]):
+            longest_elements[column] = len(title_list[column])
+        else:
+            longest_elements[column] = max_column_length
+    # Calculate opening and closing string
+    opening_string = f"/{'-' * (sum(longest_elements) + columns * 5 - 1)}\\"
+    closing_string = f"\\{'-' * (sum(longest_elements) + columns * 5 - 1)}/"
+    # Create seperating lines
+    sep_lines = []
+    for column in longest_elements:
+        sep_lines.append('-'*(column + 4))
+    # Print table
+    # Print headers
+    print(opening_string)
+    headers = []
+    for index, element in enumerate(title_list):
+        # Add centered element to list
+        headers.append(element.center(longest_elements[index], ' '))
+    print(f"|  {'  |  '.join(headers)}  |")
+    print(f"|{'|'.join(sep_lines)}|")
+    # Print body
+    for line in table:
+        centered_line = []
+        for index, element in enumerate(line):
+            # Add centered element to list
+            centered_line.append(element.center(longest_elements[index], ' '))
+        print(f"|  {'  |  '.join(centered_line)}  |")
+        # Break on last element
+        if line == table[-1]:
+            break
+        print(f"|{'|'.join(sep_lines)}|")
+    # Print footer
+    print(closing_string) 
 
 
 def print_result(result, label):
@@ -36,8 +77,17 @@ def print_result(result, label):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
-    # your code
+    print(f"{label}: ")
+    if type(result) == str:
+        print(result)
+    elif type(result) == list:
+        for line in result:
+            print(line)
+    elif type(result) == dict:
+        for key in result:
+            print(f"{key} : {result[key]}")
+    else:
+        pass
 
 
 def print_menu(title, list_options, exit_message):
@@ -61,7 +111,10 @@ def print_menu(title, list_options, exit_message):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    print(f"{title}: ")
+    for index, list_option in enumerate(list_options, start = 1):
+        print(f"    ({index}) {list_option}")
+    print(f"    (0) {exit_message}")
 
 
 def get_inputs(list_labels, title):
@@ -85,7 +138,9 @@ def get_inputs(list_labels, title):
     """
     inputs = []
 
-    # your code
+    print(title)
+    for label in list_labels:
+        inputs.append(input(f"{label}: "))
 
     return inputs
 
@@ -101,4 +156,4 @@ def print_error_message(message):
         None: This function doesn't return anything it only prints to console.
     """
 
-    # your code
+    print(f"Error: {message}")
