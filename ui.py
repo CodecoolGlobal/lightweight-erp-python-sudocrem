@@ -140,7 +140,7 @@ def get_inputs(list_labels, title):
 
     print(title)
     for label in list_labels:
-        inputs.append(input(f"{label}: "))
+        inputs.append(input(f"{label} "))
 
     return inputs
 
