@@ -37,7 +37,7 @@ def start_module():
         elif crm_input[0] == '1':
             show_table(table)
         elif crm_input[0] == '2':
-            add(table)
+            table = add(table)
         elif crm_input[0] == '3':
             remove(table)
         elif crm_input[0] == '4':
@@ -68,9 +68,9 @@ def add(table):
     Returns:
         list: Table with a new record
     """
-
-    # your code
-
+    title_list = ['ID:', 'Name:', 'Email:', 'Subscribed:']
+    new_record = ui.get_inputs(title_list, 'Enter new record')
+    table.append(new_record)
     return table
 
 
