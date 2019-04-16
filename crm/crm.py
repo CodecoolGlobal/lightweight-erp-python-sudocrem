@@ -27,7 +27,21 @@ def start_module():
         None
     """
 
-    # your code
+    menu = ['Display table', 'Add', 'Remove', 'Update',]
+    table = data_manager.get_table_from_file('crm/customers.csv')
+    while True:
+        ui.print_menu('Customer Relationship Management (CRM)', menu, 'Go back to main menu')
+        crm_input = ui.get_inputs(["Please enter a number:"], "")
+        if crm_input[0] == '0':
+            return None
+        elif crm_input[0] == '1':
+            show_table(table)
+        elif crm_input[0] == '2':
+            add(table)
+        elif crm_input[0] == '3':
+            remove(table)
+        elif crm_input[0] == '4':
+            update(table)  
 
 
 def show_table(table):
@@ -40,8 +54,7 @@ def show_table(table):
     Returns:
         None
     """
-
-    # your code
+    
 
 
 def add(table):
