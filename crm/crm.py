@@ -27,10 +27,13 @@ def start_module():
         None
     """
 
-    menu = ['Display table', 'Add', 'Remove', 'Update',]
+    menu = ['Display table', 'Add', 'Remove', 'Update']
     table = data_manager.get_table_from_file('crm/customers.csv')
     while True:
-        ui.print_menu('Customer Relationship Management (CRM)', menu, 'Go back to main menu')
+        ui.print_menu(
+            'Customer Relationship Management (CRM)',
+            menu,
+            'Go back to main menu')
         crm_input = ui.get_inputs(["Please enter a number:"], "")
         if crm_input[0] == '0':
             return None
@@ -41,7 +44,7 @@ def start_module():
         elif crm_input[0] == '3':
             table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
         elif crm_input[0] == '4':
-            update(table)  
+            table = update(table, ui.get_inputs(['ID'], "Updating")[0])
 
 
 def show_table(table):
@@ -51,11 +54,11 @@ def show_table(table):
     Args:
         table (list): list of lists to be displayed.
 
-    Returns:
+    table.remove(element)Returns:
         None
     """
     title_list = ['ID', 'Name', 'Email', 'Subscribed']
-    ui.print_table(table, title_list)
+    common.show_table(table, title_list)
 
 
 def add(table):
@@ -69,8 +72,7 @@ def add(table):
         list: Table with a new record
     """
     title_list = ['Name:', 'Email:', 'Subscribed:']
-    return common.add(table,title_list)
-
+    return common.add(table, title_list)
 
 
 def remove(table, id_):
@@ -100,9 +102,8 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
-
-    return table
+    title_list = ['Name', 'Email', 'Subscribed']
+    return common.update(table, id_, title_list)
 
 
 # special functions:
@@ -124,7 +125,8 @@ def get_longest_name_id(table):
 
 
 # the question: Which customers has subscribed to the newsletter?
-# return type: list of strings (where string is like email+separator+name, separator=";")
+# return type: list of strings (where string is like email+separator+name,
+# separator=";")
 def get_subscribed_emails(table):
     """
         Question: Which customers has subscribed to the newsletter?

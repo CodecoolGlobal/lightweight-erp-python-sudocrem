@@ -57,3 +57,19 @@ def remove(table, id_):
         if element[0] == id_:
             table.remove(element)
     return table
+
+
+
+def update(table, id_, title_list):
+    return_element = []
+    for element in table:
+        if element[0] == id_:
+            return_element.append(element[0])
+            return_element.extend(ui.get_inputs(title_list, 'Update record'))
+            for index, data in enumerate(return_element):
+                if not data:
+                    data = element[index]
+            table.remove(element)
+            break
+    table.append(return_element)
+    return table
