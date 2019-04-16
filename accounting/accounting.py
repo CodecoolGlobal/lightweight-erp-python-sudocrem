@@ -42,7 +42,7 @@ def start_module():
         "Add to table",
         "Remove from table",
         "Update table"]
-    ui.print_menu("Main menu", accounting_options, "Exit program")
+    ui.print_menu("Accounting menu:", accounting_options, "Go back to main menu:")
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = inputs[0]
     if option == "1":
