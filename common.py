@@ -59,7 +59,6 @@ def remove(table, id_):
     return table
 
 
-
 def update(table, id_, title_list):
     return_element = []
     for element in table:
