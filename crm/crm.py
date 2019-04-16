@@ -54,7 +54,8 @@ def show_table(table):
     Returns:
         None
     """
-    
+    title_list = ['ID', 'Name', 'Email', 'Subscribed']
+    ui.print_table(table, title_list)
 
 
 def add(table):
