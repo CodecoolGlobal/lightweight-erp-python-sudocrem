@@ -106,9 +106,8 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
-
-    return table
+    title_list = ['Title', 'Price', 'Month', 'Day', 'Year']
+    return common.update(table, id_, title_list)
 
 
 # special functions:
