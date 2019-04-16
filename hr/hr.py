@@ -16,6 +16,7 @@ import data_manager
 import common
 
 titles = ['Name', 'Birth year']
+NAME, BIRTH = (1, 2)
 
 
 def start_module():
@@ -125,8 +126,8 @@ def get_oldest_person(table):
     Returns:
         list: A list of strings (name or names if there are two more with the same value)
     """
-
-    # your code
+    min_birth_year = min(person[BIRTH] for person in table)
+    return [person[NAME] for person in table if person[BIRTH] == min_birth_year]
 
 
 def get_persons_closest_to_average(table):
