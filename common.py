@@ -50,3 +50,10 @@ def add(table, title_list):
     new_record.extend(ui.get_inputs(title_list, 'Enter new record'))
     table.append(new_record)
     return table
+
+
+def remove(table, id_):
+    for element in table:
+        if element[0] == id_:
+            table.remove(element)
+    return table

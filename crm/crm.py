@@ -39,7 +39,7 @@ def start_module():
         elif crm_input[0] == '2':
             table = add(table)
         elif crm_input[0] == '3':
-            remove(table)
+            table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
         elif crm_input[0] == '4':
             update(table)  
 
@@ -72,6 +72,7 @@ def add(table):
     return common.add(table,title_list)
 
 
+
 def remove(table, id_):
     """
     Remove a record with a given id from the table.
@@ -84,9 +85,7 @@ def remove(table, id_):
         list: Table without specified record.
     """
 
-    
-
-    return table
+    return common.remove(table, id_)
 
 
 def update(table, id_):
