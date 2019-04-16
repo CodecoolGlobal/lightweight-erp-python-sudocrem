@@ -37,3 +37,7 @@ def generate_random(table):
             generated_in_keys = False
 
     return generated
+
+
+def show_table(table, title_list):
+    ui.print_table(table, title_list)
