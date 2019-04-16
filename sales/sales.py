@@ -29,7 +29,24 @@ def start_module():
         None
     """
 
-    # your code
+    menu = ['Display table', 'Add', 'Remove', 'Update']
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    while True:
+        ui.print_menu(
+            'Sales',
+            menu,
+            'Go back to main menu')
+        sales_input = ui.get_inputs(["Please enter a number:"], "")
+        if sales_input[0] == '0':
+            return None
+        elif sales_input[0] == '1':
+            show_table(table)
+        elif sales_input[0] == '2':
+            table = add(table)
+        elif sales_input[0] == '3':
+            table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
+        elif sales_input[0] == '4':
+            table = update(table, ui.get_inputs(['ID'], "Updating")[0])
 
 
 def show_table(table):
