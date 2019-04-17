@@ -145,6 +145,7 @@ def which_year_max(table):
     Returns:
         number
     """
+    # TODO : profit instead of income
     # your code
     # type (string): in = income, out = outflow
 
