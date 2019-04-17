@@ -132,7 +132,16 @@ def get_available_items(table):
         list: list of lists (the inner list contains the whole row with their actual data types)
     """
 
-    # your code
+    current_date = 2016
+    available_items = []
+
+    for element in table:
+        if (int(element[PURCHASE_YEAR]) + int(element[DURABILITY])) > current_date:
+            available_items.append(element)
+    for available_item in available_items:
+        for index in range(3,5):
+            available_item[index] = int(available_item[index])
+    return available_items
 
 
 def get_average_durability_by_manufacturers(table):
