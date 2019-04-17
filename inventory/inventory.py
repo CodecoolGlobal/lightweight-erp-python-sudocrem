@@ -85,9 +85,7 @@ def add(table):
         list: Table with a new record
     """
 
-    # your code
-
-    return table
+    return common.add(table, TITLES)
 
 
 def remove(table, id_):
