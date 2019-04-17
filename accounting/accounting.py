@@ -29,14 +29,6 @@ def start_module():
         None
     """
     # you code
-    """
-    (0): Go back to menu
-    (1): Show table
-    (2): Add to table
-    (3): Remove from table
-    (4): Update table
-    (5): Year of highest profit
-    """
     file_name = 'accounting/items.csv'
     table = data_manager.get_table_from_file("accounting/items.csv")
     accounting_options = [
@@ -145,7 +137,6 @@ def which_year_max(table):
     Returns:
         number
     """
-    # TODO : profit instead of income
     # your code
     # type (string): in = income, out = outflow
 
@@ -154,13 +145,21 @@ def which_year_max(table):
     data_amount = 5
     profit_max = 0
     year_max = 0
+    actual_year = 0
+    profit = 0
 
     for data in table:
-        if (data[data_type] == "in") and (int(data[data_amount]) > profit_max):
-            profit_max = int(data[data_amount])
-            year_max = data[data_year]
+        data[data_year] = actual_year
+        if data[data_year] == actual_year:
+            if data[data_type] == "in":
+                profit += int(data[data_amount])
+            elif data[data_type] == "out":
+                profit -= int(data[data_amount])
+        if profit > profit_max:
+            year_max = actual_year
+            profit_max = profit
+        
     return year_max
-
 
 def avg_amount(table, year):
     """
