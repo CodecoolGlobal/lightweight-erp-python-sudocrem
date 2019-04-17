@@ -27,7 +27,7 @@ def start_module():
         None
     """
 
-    menu = ['Display table', 'Add', 'Remove', 'Update']
+    menu = ['Display table', 'Add', 'Remove', 'Update', 'ID of the longest name', 'Get subscribed emails']
     file_name = 'crm/customers.csv'
     table = data_manager.get_table_from_file(file_name)
     while True:
@@ -46,6 +46,10 @@ def start_module():
             table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
         elif crm_input[0] == '4':
             table = update(table, ui.get_inputs(['ID'], "Updating")[0])
+        elif crm_input[0] == '5':
+            ui.print_result(get_longest_name_id(table), 'ID of the longest name')
+        elif crm_input[0] == '6':
+            ui.print_result(get_subscribed_emails(table), 'Get subscribed emails')
         
         data_manager.write_table_to_file(file_name, table)
 
@@ -124,7 +128,23 @@ def get_longest_name_id(table):
                 the last by alphabetical order of the names)
         """
 
-    # your code
+    longest_string_length = 0
+    longest_string_ID = ''
+    longest_string_name = ''
+    for record in table:
+        if len(record[1]) >= longest_string_length:
+            if len(record[1]) == longest_string_length:
+                if record[1] > longest_string_name:
+                    longest_string_length = len(record[1])
+                    longest_string_ID = record[0]
+                    longest_string_name = record[1]
+                else:
+                    continue
+            else:
+                longest_string_length = len(record[1])
+                longest_string_ID = record[0]
+                longest_string_name = record[1]
+    return longest_string_ID
 
 
 # the question: Which customers has subscribed to the newsletter?
@@ -140,5 +160,10 @@ def get_subscribed_emails(table):
         Returns:
             list: list of strings (where a string is like "email;name")
         """
+    subscribed_emails = []
+    for record in table:
+        if record[3] == '1':
+            subscribed_emails.append(';'.join([record[2], record[1]]))
+    return subscribed_emails
 
-    # your code
+

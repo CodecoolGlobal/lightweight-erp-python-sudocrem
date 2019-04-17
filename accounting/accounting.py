@@ -29,43 +29,38 @@ def start_module():
         None
     """
     # you code
-    """
-    (0): Go back to menu
-    (1): Show table
-    (2): Add to table
-    (3): Remove from table
-    (4): Update table
-    """
+    file_name = 'accounting/items.csv'
     table = data_manager.get_table_from_file("accounting/items.csv")
     accounting_options = [
         "Show table",
         "Add to table",
         "Remove from table",
-        "Update table"]
-    ui.print_menu("Accounting menu:", accounting_options, "Go back to main menu:")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-        start_module()
-    elif option == "2":
-        add(table)
-        start_module()
-    elif option == "3":
-        get_id = ui.get_inputs(["Please enter an ID to remove: "], "")
-        id_ = get_id[0]
-        remove(table, id_)
-        start_module()
-    elif option == "4":
-        get_id = ui.get_inputs(["Please enter an ID to update: "], "")
-        id_ = get_id[0]
-        update(table, id_)
-        start_module()
-    elif option == "0":
-
-        return None
-    else:
-        raise KeyError("There is no such option.")
+        "Update table",
+        "Year of highest profit"]
+    while True:
+        ui.print_menu("Accounting menu:", accounting_options, "Go back to main menu:")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            get_id = ui.get_inputs(["Please enter an ID to remove: "], "")
+            id_ = get_id[0]
+            remove(table, id_)
+        elif option == "4":
+            get_id = ui.get_inputs(["Please enter an ID to update: "], "")
+            id_ = get_id[0]
+            update(table, id_)
+        elif option == "5":
+            year_max = which_year_max(table)
+            ui.print_result(str(year_max), "Year of highest profit")
+        elif option == "0":
+            return None
+        else:
+            raise KeyError("There is no such option.")
+        data_manager.write_table_to_file(file_name, table)
 
 
 def show_table(table):
@@ -78,8 +73,9 @@ def show_table(table):
     Returns:
         None
     """
-
     # your code
+    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
+    common.show_table(table, title_list)
 
 
 def add(table):
@@ -92,10 +88,9 @@ def add(table):
     Returns:
         list: Table with a new record
     """
-
     # your code
-
-    return table
+    title_list = ['Month', 'Day', 'Year', 'Type', 'Amount']
+    return common.add(table, title_list)
 
 
 def remove(table, id_):
@@ -111,8 +106,7 @@ def remove(table, id_):
     """
 
     # your code
-
-    return table
+    return common.remove(table, id_)
 
 
 def update(table, id_):
@@ -128,8 +122,8 @@ def update(table, id_):
     """
 
     # your code
-
-    return table
+    title_list = ['Month', 'Day', 'Year', 'Type', 'Amount']
+    return common.update(table, id_, title_list)
 
 
 # special functions:
@@ -138,16 +132,34 @@ def update(table, id_):
 def which_year_max(table):
     """
     Question: Which year has the highest profit? (profit = in - out)
-
     Args:
         table (list): data table to work on
-
     Returns:
         number
     """
-
     # your code
+    # type (string): in = income, out = outflow
 
+    data_year = 3
+    data_type = 4
+    data_amount = 5
+    profit_max = 0
+    year_max = 0
+    actual_year = 0
+    profit = 0
+
+    for data in table:
+        data[data_year] = actual_year
+        if data[data_year] == actual_year:
+            if data[data_type] == "in":
+                profit += int(data[data_amount])
+            elif data[data_type] == "out":
+                profit -= int(data[data_amount])
+        if profit > profit_max:
+            year_max = actual_year
+            profit_max = profit
+        
+    return year_max
 
 def avg_amount(table, year):
     """
