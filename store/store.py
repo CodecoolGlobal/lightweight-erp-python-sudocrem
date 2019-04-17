@@ -27,30 +27,35 @@ def start_module():
     Returns:
         None
     """
-    title_list = ['ID', 'Name', 'Manufacturer', 'Price', 'In stock']
-    data_manager.get_table_from_file('games.csv')
+   
+   
+    table = data_manager.get_table_from_file('store/games.csv')
     options = ["Display table",
                "Add to table",
                "Remove",
                "Update table",
                "Count by manufactureres",
                "Average by manufacturer"]
-
-    ui.print_menu("Store manager", options, "Exit program")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-    elif option == "2":
-        add(table)
-    elif option == "3":
-        remove(table)
-    elif option == "4":
-        update(table)
-    elif option == "0":
-        sys.exit(0)
-    else:
-        raise KeyError("There is no such option.")
+    
+    while True:
+        ui.print_menu("Store manager", options, "Exit program")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            common.remove(table, ui.get_inputs(['ID'], '')[0])
+            data_manager.write_table_to_file('store/games.csv', table)
+        elif option == "4":
+            title_list = ['Name', 'Manufacturer', 'Price', 'In stock']
+            common.update(table, ui.get_inputs(['ID'], '')[0], title_list)
+            data_manager.write_table_to_file('store/games.csv', table)
+        elif option == "0":
+            sys.exit(0)
+        else:
+            raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -63,7 +68,7 @@ def show_table(table):
     Returns:
         None
     """
-
+    title_list = ['ID', 'Name', 'Manufacturer', 'Price', 'In stock']
     common.show_table(table, title_list)
 
 
@@ -77,9 +82,8 @@ def add(table):
     Returns:
         list: Table with a new record
     """
-
-    # your code
-
+    title_list = ['Name', 'Manufacturer', 'Price', 'In stock']
+    common.add(table, title_list)
     return table
 
 
@@ -94,10 +98,7 @@ def remove(table, id_):
     Returns:
         list: Table without specified record.
     """
-
-    # your code
-
-    return table
+    return common.remove(table, id_)
 
 
 def update(table, id_):
@@ -111,9 +112,7 @@ def update(table, id_):
     Returns:
         list: table with updated record
     """
-
-    # your code
-
+    common.update(table, id_, title_list)
     return table
 
 
@@ -131,7 +130,7 @@ def get_counts_by_manufacturers(table):
          dict: A dictionary with this structure: { [manufacturer] : [count] }
     """
 
-    # your code
+    
 
 
 def get_average_by_manufacturer(table, manufacturer):

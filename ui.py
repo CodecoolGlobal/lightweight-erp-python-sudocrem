@@ -1,5 +1,12 @@
 """ User Interface (UI) module """
 
+def get_summa(list):
+    sum_ = 0
+    for element in list:
+        sum_ += int(element)
+    return sum_
+
+
 
 def print_table(table, title_list):
     """
@@ -36,8 +43,8 @@ def print_table(table, title_list):
         else:
             longest_elements[column] = max_column_length
     # Calculate opening and closing string
-    opening_string = f"/{'-' * (sum(longest_elements) + columns * 5 - 1)}\\"
-    closing_string = f"\\{'-' * (sum(longest_elements) + columns * 5 - 1)}/"
+    opening_string = f"/{'-' * (get_summa(longest_elements) + columns * 5 - 1)}\\"
+    closing_string = f"\\{'-' * (get_summa(longest_elements) + columns * 5 - 1)}/"
     # Create seperating lines
     sep_lines = []
     for column in longest_elements:

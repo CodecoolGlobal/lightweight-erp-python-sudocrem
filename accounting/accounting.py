@@ -36,7 +36,8 @@ def start_module():
         "Add to table",
         "Remove from table",
         "Update table",
-        "Year of highest profit"]
+        "Year of highest profit",
+        "Annual average"]
     while True:
         ui.print_menu("Accounting menu:", accounting_options, "Go back to main menu:")
         inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -55,7 +56,11 @@ def start_module():
             update(table, id_)
         elif option == "5":
             year_max = which_year_max(table)
-            ui.print_result(str(year_max), "Year of highest profit")
+            ui.print_result(year_max, "Year of highest profit")
+        elif option == "6":
+            year = int(ui.get_inputs(["Please give a year: "], "")[0])
+            avg_year = avg_amount(table, year)
+            ui.print_result(avg_year, "Annual profit average")
         elif option == "0":
             return None
         else:
@@ -149,28 +154,43 @@ def which_year_max(table):
     profit = 0
 
     for data in table:
-        data[data_year] = actual_year
+        actual_year = data[data_year]
         if data[data_year] == actual_year:
             if data[data_type] == "in":
                 profit += int(data[data_amount])
             elif data[data_type] == "out":
                 profit -= int(data[data_amount])
         if profit > profit_max:
-            year_max = actual_year
+            year_max = int(actual_year)
             profit_max = profit
         
     return year_max
 
+
 def avg_amount(table, year):
     """
     Question: What is the average (per item) profit in a given year? [(profit)/(items count)]
-
     Args:
         table (list): data table to work on
         year (number)
-
     Returns:
         number
     """
-
     # your code
+
+    data_year = 3
+    data_type = 4
+    data_amount = 5
+    profit_of_year = 0
+    items_count = 0
+
+    for data in table:
+        if int(data[data_year]) == year:
+            if data[data_type] == "in":
+                profit_of_year += int(data[data_amount])
+                items_count += 1
+            elif data[data_type] == "out":
+                profit_of_year -= int(data[data_amount])
+                items_count += 1
+    avg_amount = (profit_of_year / items_count)
+    return avg_amount
