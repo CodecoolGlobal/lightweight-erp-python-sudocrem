@@ -133,17 +133,6 @@ def get_oldest_person(table):
     return [person[NAME] for person in table if int(person[BIRTH]) == min_birth_year]
 
 
-def average(numbers):
-    length = len(numbers)
-    if length == 0:
-        return 0
-
-    sum_ = 0
-    for number in numbers:
-        sum_ += number
-    return sum_ / length
-
-
 def get_persons_closest_to_average(table):
     """
     Question: Who is the closest to the average age?
@@ -157,7 +146,7 @@ def get_persons_closest_to_average(table):
 
     # equivalent to: who's birth year is closest to the average birth year?
     birth_years = [int(person[BIRTH]) for person in table]
-    average_year = average(birth_years)
+    average_year = common.average(birth_years)
 
     min_dist = min(abs(average_year - int(person[BIRTH])) for person in table)
     closest_persons_names = []

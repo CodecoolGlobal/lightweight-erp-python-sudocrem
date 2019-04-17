@@ -41,6 +41,17 @@ def generate_random(table):
     return shuffled
 
 
+def average(numbers):
+    length = len(numbers)
+    if length == 0:
+        return 0
+
+    sum_ = 0
+    for number in numbers:
+        sum_ += number
+    return sum_ / length
+
+
 def show_table(table, title_list):
     ui.print_table(table, title_list)
 
