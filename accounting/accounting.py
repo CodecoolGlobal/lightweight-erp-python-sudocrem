@@ -62,7 +62,7 @@ def start_module():
             return None
         else:
             raise KeyError("There is no such option.")
-
+        data_manager.write_table_to_file(file_name, table)
 
 def show_table(table):
     """
