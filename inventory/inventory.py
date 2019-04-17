@@ -17,6 +17,9 @@ import data_manager
 # common module
 import common
 
+TITLES = ['Name', 'Manufacturer', "Purchase year", "Durability"]
+NAME, MANUFACTURER, PURCHASE_YEAR, DURABILITY = tuple(range(1, len(TITLES)+1))
+
 
 def start_module():
     """
