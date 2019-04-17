@@ -75,7 +75,7 @@ def show_table(table):
         None
     """
     title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
-    common.show(table,title_list)
+    common.show(table, title_list)
     # your code
 
 
@@ -89,10 +89,10 @@ def add(table):
     Returns:
         list: Table with a new record
     """
-
     # your code
+    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
+    return common.add(table, title_list)
 
-    return table
 
 
 def remove(table, id_):
