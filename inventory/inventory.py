@@ -70,7 +70,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ["ID"] + TITLES
+    common.show_table(table, title_list)
 
 
 def add(table):
