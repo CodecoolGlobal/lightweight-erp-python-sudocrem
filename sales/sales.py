@@ -29,7 +29,7 @@ def start_module():
         None
     """
 
-    menu = ['Display table', 'Add', 'Remove', 'Update']
+    menu = ['Display table', 'Add', 'Remove', 'Update', 'Get lowest priced items ID']
     file_name = 'sales/sales.csv'
     table = data_manager.get_table_from_file(file_name)
     while True:
@@ -48,6 +48,8 @@ def start_module():
             table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
         elif sales_input[0] == '4':
             table = update(table, ui.get_inputs(['ID'], "Updating")[0])
+        elif sales_input[0] == '5':
+            ui.print_result(get_lowest_price_item_id(table), 'Get lowest priced items ID')
 
         data_manager.write_table_to_file(file_name, table)
 
@@ -127,7 +129,11 @@ def get_lowest_price_item_id(table):
          string: id
     """
 
-    # your code
+    price_index = 2
+    ID_index = 0
+    lowest_price_item_id = min(table, key = lambda x: x[price_index])[ID_index]
+    return lowest_price_item_id
+
 
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
