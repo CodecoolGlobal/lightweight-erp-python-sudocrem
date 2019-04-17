@@ -146,4 +146,15 @@ def get_average_durability_by_manufacturers(table):
         dict: a dictionary with this structure: { [manufacturer] : [avg] }
     """
 
-    # your code
+    manufacturers = set(product[MANUFACTURER] for product in table)
+
+    avg_durs = {}
+    for manufacturer in manufacturers:
+        durabilities_for_manuf = []
+        for product in table:
+            if product[MANUFACTURER] == manufacturer:
+                durabilities_for_manuf.append(int(product[DURABILITY]))
+                
+        avg_durs[manufacturer] = common.average(durabilities_for_manuf)
+
+    return avg_durs
