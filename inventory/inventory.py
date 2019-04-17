@@ -115,9 +115,7 @@ def update(table, id_):
         list: table with updated record
     """
 
-    # your code
-
-    return table
+    return common.update(table, id_, TITLES)
 
 
 # special functions:
