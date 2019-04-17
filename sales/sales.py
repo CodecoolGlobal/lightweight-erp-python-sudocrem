@@ -29,7 +29,7 @@ def start_module():
         None
     """
 
-    menu = ['Display table', 'Add', 'Remove', 'Update', 'Get lowest priced items ID']
+    menu = ['Display table', 'Add', 'Remove', 'Update', 'Get lowest priced items ID', 'Filter between dates']
     file_name = 'sales/sales.csv'
     table = data_manager.get_table_from_file(file_name)
     while True:
@@ -50,6 +50,9 @@ def start_module():
             table = update(table, ui.get_inputs(['ID'], "Updating")[0])
         elif sales_input[0] == '5':
             ui.print_result(get_lowest_price_item_id(table), 'Get lowest priced items ID')
+        elif sales_input[0] == '6':
+            year_from, month_from, day_from, year_to, month_to, day_to = ui.get_inputs(['Year from:', 'Month from:', 'Day from:','Year to:','Month to:', 'Day to:'], "Filters")
+            ui.print_result(get_items_sold_between(table, int(month_from), int(day_from), int(year_from), int(month_to), int(day_to), int(year_to)), 'Records between specified dates')
 
         data_manager.write_table_to_file(file_name, table)
 
@@ -153,4 +156,28 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         list: list of lists (the filtered table)
     """
 
-    # your code
+    month_index = 3
+    day_index = 4
+    year_index = 5
+
+    filtered_records = []
+    for record in table:
+        if year_from <= int(record[year_index]) <= year_to:
+            if (int(record[year_index]) == year_from) or (int(record[year_index]) == year_to):
+                if month_from <= int(record[month_index]) <= month_to:
+                    if (int(record[month_index]) == month_from) or (int(record[month_index]) == month_to):
+                        if day_from <= int(record[day_index]) <= day_to:
+                            if (int(record[day_index]) == day_from) or (int(record[day_index]) == day_to):
+                                pass
+                            else:
+                                filtered_records.append(record)
+                    else:
+                        filtered_records.append(record)
+            else:
+                filtered_records.append(record)
+    
+    for filtered_record in filtered_records:
+        for index in range(2,6):
+            filtered_record[index] = int(filtered_record[index])
+     
+    return filtered_records
