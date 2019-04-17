@@ -36,6 +36,7 @@ def start_module():
     (3): Remove from table
     (4): Update table
     """
+    file_name = 'accounting/items.csv'
     table = data_manager.get_table_from_file("accounting/items.csv")
     accounting_options = [
         "Show table",
@@ -63,6 +64,7 @@ def start_module():
         else:
             raise KeyError("There is no such option.")
         data_manager.write_table_to_file(file_name, table)
+
 
 def show_table(table):
     """
