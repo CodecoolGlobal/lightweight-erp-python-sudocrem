@@ -42,7 +42,7 @@ def start_module():
         "Add to table",
         "Remove from table",
         "Update table"]
-    while True:   
+    while True:
         ui.print_menu("Accounting menu:", accounting_options, "Go back to main menu:")
         inputs = ui.get_inputs(["Please enter a number: "], "")
         option = inputs[0]
@@ -94,7 +94,6 @@ def add(table):
     return common.add(table, title_list)
 
 
-
 def remove(table, id_):
     """
     Remove a record with a given id from the table.
@@ -108,7 +107,6 @@ def remove(table, id_):
     """
 
     # your code
-    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
     return common.remove(table, id_)
 
 
@@ -125,7 +123,7 @@ def update(table, id_):
     """
 
     # your code
-
+    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
     return common.update(table, id_, title_list)
 
 
