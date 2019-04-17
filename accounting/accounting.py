@@ -108,7 +108,7 @@ def remove(table, id_):
     """
 
     # your code
-
+    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
     return common.remove(table, id_)
 
 
@@ -126,7 +126,7 @@ def update(table, id_):
 
     # your code
 
-    return table
+    return common.update(table, id_, title_list)
 
 
 # special functions:
