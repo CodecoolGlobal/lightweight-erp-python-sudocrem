@@ -42,30 +42,26 @@ def start_module():
         "Add to table",
         "Remove from table",
         "Update table"]
-    ui.print_menu("Accounting menu:", accounting_options, "Go back to main menu:")
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        show_table(table)
-        start_module()
-    elif option == "2":
-        add(table)
-        start_module()
-    elif option == "3":
-        get_id = ui.get_inputs(["Please enter an ID to remove: "], "")
-        id_ = get_id[0]
-        remove(table, id_)
-        start_module()
-    elif option == "4":
-        get_id = ui.get_inputs(["Please enter an ID to update: "], "")
-        id_ = get_id[0]
-        update(table, id_)
-        start_module()
-    elif option == "0":
-
-        return None
-    else:
-        raise KeyError("There is no such option.")
+    while True:   
+        ui.print_menu("Accounting menu:", accounting_options, "Go back to main menu:")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            get_id = ui.get_inputs(["Please enter an ID to remove: "], "")
+            id_ = get_id[0]
+            remove(table, id_)
+        elif option == "4":
+            get_id = ui.get_inputs(["Please enter an ID to update: "], "")
+            id_ = get_id[0]
+            update(table, id_)
+        elif option == "0":
+            return None
+        else:
+            raise KeyError("There is no such option.")
 
 
 def show_table(table):
@@ -78,7 +74,8 @@ def show_table(table):
     Returns:
         None
     """
-
+    title_list = ['ID', 'Month', 'Day', 'Year', 'Type', 'Amount']
+    common.show(table,title_list)
     # your code
 
 
