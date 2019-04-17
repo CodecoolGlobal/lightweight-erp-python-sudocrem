@@ -17,6 +17,9 @@ import data_manager
 # common module
 import common
 
+TITLES = ['Name', 'Manufacturer', "Purchase year", "Durability"]
+NAME, MANUFACTURER, PURCHASE_YEAR, DURABILITY = tuple(range(1, len(TITLES)+1))
+
 
 def start_module():
     """
@@ -28,7 +31,32 @@ def start_module():
         None
     """
 
-    # your code
+    menu = ['Display table', 'Add', 'Remove', 'Update', 'Oldest person', 'Closest to average age']
+    file_name = 'hr/persons.csv'
+
+    while True:
+        table = data_manager.get_table_from_file(file_name)
+
+        ui.print_menu(
+            'Inventory manager',
+            menu,
+            'Go back to main menu')
+        inventory_input = ui.get_inputs(["Please enter a number:"], "")
+        if inventory_input[0] == '0':
+            return None
+        elif inventory_input[0] == '1':
+            show_table(table)
+        elif inventory_input[0] == '2':
+            table = add(table)
+        elif inventory_input[0] == '3':
+            table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
+        elif inventory_input[0] == '4':
+            table = update(table, ui.get_inputs(['ID'], "Updating")[0])
+        elif inventory_input[0] == '5':
+            ui.print_result(get_available_items(table), "Available items")
+        elif inventory_input[0] == '6':
+            ui.print_result(get_average_durability_by_manufacturers(table), "Average durability by manufacturers")
+        data_manager.write_table_to_file(file_name, table)
 
 
 def show_table(table):
@@ -42,7 +70,8 @@ def show_table(table):
         None
     """
 
-    # your code
+    title_list = ["ID"] + TITLES
+    common.show_table(table, title_list)
 
 
 def add(table):

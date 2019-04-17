@@ -29,7 +29,7 @@ def start_module():
         None
     """
 
-    menu = ['Display table', 'Add', 'Remove', 'Update']
+    menu = ['Display table', 'Add', 'Remove', 'Update', 'Oldest person', 'Closest to average age']
     file_name = 'hr/persons.csv'
 
     while True:
@@ -39,18 +39,21 @@ def start_module():
             'Human resources manager',
             menu,
             'Go back to main menu')
-        crm_input = ui.get_inputs(["Please enter a number:"], "")
-        if crm_input[0] == '0':
+        hr_input = ui.get_inputs(["Please enter a number:"], "")
+        if hr_input[0] == '0':
             return None
-        elif crm_input[0] == '1':
+        elif hr_input[0] == '1':
             show_table(table)
-        elif crm_input[0] == '2':
+        elif hr_input[0] == '2':
             table = add(table)
-        elif crm_input[0] == '3':
+        elif hr_input[0] == '3':
             table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
-        elif crm_input[0] == '4':
+        elif hr_input[0] == '4':
             table = update(table, ui.get_inputs(['ID'], "Updating")[0])
-
+        elif hr_input[0] == '5':
+            ui.print_result(get_oldest_person(table), "They are the oldest")
+        elif hr_input[0] == '6':
+            ui.print_result(get_persons_closest_to_average(table), "They are the closest to average age")
         data_manager.write_table_to_file(file_name, table)
 
 
@@ -140,5 +143,14 @@ def get_persons_closest_to_average(table):
     Returns:
         list: list of strings (name or names if there are two more with the same value)
     """
-    
-    # your code
+
+    # equivalent to: who's birth year is closest to the average birth year?
+    birth_years = [int(person[BIRTH]) for person in table]
+    average_year = common.average(birth_years)
+
+    min_dist = min(abs(average_year - int(person[BIRTH])) for person in table)
+    closest_persons_names = []
+    for person in table:
+        if abs(average_year - int(person[BIRTH])) == min_dist:
+            closest_persons_names.append(person[NAME])
+    return closest_persons_names
