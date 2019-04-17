@@ -29,7 +29,7 @@ def start_module():
         None
     """
 
-    menu = ['Display table', 'Add', 'Remove', 'Update']
+    menu = ['Display table', 'Add', 'Remove', 'Update', 'Oldest person', 'Closest to average age']
     file_name = 'hr/persons.csv'
 
     while True:
@@ -39,18 +39,21 @@ def start_module():
             'Human resources manager',
             menu,
             'Go back to main menu')
-        crm_input = ui.get_inputs(["Please enter a number:"], "")
-        if crm_input[0] == '0':
+        hr_input = ui.get_inputs(["Please enter a number:"], "")
+        if hr_input[0] == '0':
             return None
-        elif crm_input[0] == '1':
+        elif hr_input[0] == '1':
             show_table(table)
-        elif crm_input[0] == '2':
+        elif hr_input[0] == '2':
             table = add(table)
-        elif crm_input[0] == '3':
+        elif hr_input[0] == '3':
             table = remove(table, ui.get_inputs(['ID'], "Removing")[0])
-        elif crm_input[0] == '4':
+        elif hr_input[0] == '4':
             table = update(table, ui.get_inputs(['ID'], "Updating")[0])
-
+        elif hr_input[0] == '5':
+            ui.print_result(get_oldest_person(table), "They are the oldest")
+        elif hr_input[0] == '6':
+            ui.print_result(get_persons_closest_to_average(table), "They are the closest to average age")
         data_manager.write_table_to_file(file_name, table)
 
 
