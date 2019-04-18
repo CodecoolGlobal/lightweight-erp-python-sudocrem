@@ -129,7 +129,13 @@ def get_counts_by_manufacturers(table):
     Returns:
          dict: A dictionary with this structure: { [manufacturer] : [count] }
     """
-
+    return_dict = {}
+    for game in table:
+        if game[2] in return_dict:
+            return_dict[game[2]] += 1
+        else:
+            return_dict.update({game[2]:1})
+    return return_dict
     
 
 
@@ -144,5 +150,12 @@ def get_average_by_manufacturer(table, manufacturer):
     Returns:
          number
     """
+    title_count = 0
+    stock_count = 0
+    for record in table:
+        if record[2] == manufacturer:
+            stock_count += int(record[4])
+            title_count += 1
+    return stock_count / title_count
 
-    # your code
+
