@@ -240,6 +240,14 @@ def get_item_id_sold_last():
     return get_item_id_sold_last_from_table(table)
 
 
+def get_sale_date(sale_record):
+    year = int(sale_record[get_column_index("year")])
+    month = int(sale_record[get_column_index("month")])
+    day = int(sale_record[get_column_index("day")])
+
+    return (year, month, day)
+
+
 def get_item_id_sold_last_from_table(table):
     """
     Returns the _id_ of the item that was sold most recently.
@@ -251,7 +259,8 @@ def get_item_id_sold_last_from_table(table):
         str: the _id_ of the item that was sold most recently.
     """
 
-    year, day, month = 
+    last_sale_record = max(table, key=get_sale_date)
+    return last_sale_record[get_column_index("id")]
 
 
 def get_item_title_sold_last_from_table(table):
