@@ -190,7 +190,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
 def get_column_index(column_name):
     columns = ("id", "title", "price", "month", "day", "year", "customer_id")
-    return columns.index(column_name)
+    for index, column in enumerate(columns):
+        if column == column_name:
+            return index
 
 
 def get_title_by_id(id):
@@ -278,7 +280,8 @@ def get_item_title_sold_last_from_table(table):
         str: the _title_ of the item that was sold most recently.
     """
 
-    # your code
+    last_sale_record = max(table, key=get_sale_date)
+    return last_sale_record[get_column_index("title")]
 
 
 def get_the_sum_of_prices(item_ids):
@@ -420,7 +423,8 @@ def get_num_of_sales_per_customer_ids():
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_num_of_sales_per_customer_ids_from_table(table)
 
 
 def get_num_of_sales_per_customer_ids_from_table(table):
@@ -433,5 +437,11 @@ def get_num_of_sales_per_customer_ids_from_table(table):
      Returns:
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
-
-    # your code
+    num_of_sales_per_customer_ids = {}
+    for sale_record in table:
+        customer_id = table[get_column_index("customer_id")]
+        if customer_id in num_of_sales_per_customer_ids:
+            num_of_sales_per_customer_ids[customer_id] += 1
+        else:
+            num_of_sales_per_customer_ids[customer_id] = 0
+    return num_of_sales_per_customer_ids
