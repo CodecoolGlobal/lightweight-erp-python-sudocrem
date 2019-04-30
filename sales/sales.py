@@ -446,9 +446,9 @@ def get_num_of_sales_per_customer_ids_from_table(table):
     """
     num_of_sales_per_customer_ids = {}
     for sale_record in table:
-        customer_id = table[get_column_index("customer_id")]
+        customer_id = sale_record[get_column_index("customer_id")]
         if customer_id in num_of_sales_per_customer_ids:
             num_of_sales_per_customer_ids[customer_id] += 1
         else:
-            num_of_sales_per_customer_ids[customer_id] = 0
+            num_of_sales_per_customer_ids[customer_id] = 1
     return num_of_sales_per_customer_ids
