@@ -208,7 +208,7 @@ def get_title_by_id(id):
         str: the title of the item
     """
     
-    table = data_manager.get_table_from_file(sales.csv)
+    table = data_manager.get_table_from_file('sales.csv')
     get_title_by_id(table, id)
 
 
@@ -225,9 +225,9 @@ def get_title_by_id_from_table(table, id):
         str: the title of the item
     """
     for row in table:
-        for id in table:
-            if table[row,0] == id:
-                return table[row,1]
+        for id in row:
+            if row[0] == id:
+                return row[1]
 
     
 
