@@ -394,7 +394,8 @@ def get_all_sales_ids_for_customer_ids():
             all the sales id belong to the given customer_id
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_all_sales_ids_for_customer_ids_from_table(table)
 
 
 def get_all_sales_ids_for_customer_ids_from_table(table):
@@ -410,7 +411,15 @@ def get_all_sales_ids_for_customer_ids_from_table(table):
          all the sales id belong to the given customer_id
     """
 
-    # your code
+    all_sales_ids_for_customer_ids = {}
+
+    for record in table:
+        all_sales_ids_for_customer_ids.update({record[get_column_index('customer_id')] : []})
+
+    for record in table:
+        all_sales_ids_for_customer_ids[record[get_column_index('customer_id')]].append(record[get_column_index('id')])
+
+    return all_sales_ids_for_customer_ids
 
 
 def get_num_of_sales_per_customer_ids():
