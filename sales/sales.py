@@ -190,7 +190,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
 def get_column_index(column_name):
     columns = ("id", "title", "price", "month", "day", "year", "customer_id")
-    return columns.index(column_name)
+    for index, column in enumerate(columns):
+        if column == column_name:
+            return index
 
 
 def get_title_by_id(id):
