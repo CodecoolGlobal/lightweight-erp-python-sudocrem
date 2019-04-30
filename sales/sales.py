@@ -188,6 +188,10 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 # functions supports data abalyser
 # --------------------------------
 
+def get_column_index(table, column_name):
+    columns = ("id", "title", "price", "month", "day", "year", "customer_id")
+    return table.index(column_name)
+
 
 def get_title_by_id(id):
 
@@ -247,7 +251,7 @@ def get_item_id_sold_last_from_table(table):
         str: the _id_ of the item that was sold most recently.
     """
 
-    # your code
+    year, day, month = 
 
 
 def get_item_title_sold_last_from_table(table):
