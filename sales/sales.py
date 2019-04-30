@@ -201,8 +201,12 @@ def get_title_by_id(id):
     Returns:
         str: the title of the item
     """
-
-    # your code
+    table = data_manager.get_table_from_file
+    id = ui.get_inputs
+    for id in table:
+        if table[0] == id:
+            return table[1]
+            
 
 
 def get_title_by_id_from_table(table, id):
