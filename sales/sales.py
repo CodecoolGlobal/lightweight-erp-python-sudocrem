@@ -178,9 +178,10 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
                 filtered_records.append(record)
     
     for filtered_record in filtered_records:
-        for index in range(2,6):
+        for index in range(2, 6):
             filtered_record[index] = int(filtered_record[index])
-     
+        del filtered_record[-1]
+
     return filtered_records
     # your code
 
@@ -188,7 +189,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 # functions supports data abalyser
 # --------------------------------
 
-def get_column_index(column_name):
+def get_column_index_(column_name):
     columns = ("id", "title", "price", "month", "day", "year", "customer_id")
     for index, column in enumerate(columns):
         if column == column_name:
@@ -225,8 +226,8 @@ def get_title_by_id_from_table(table, id):
     """
 
     for record in table:
-        if record[get_column_index('id')] == id:
-            return record[get_column_index('title')]
+        if record[get_column_index_('id')] == id:
+            return record[get_column_index_('title')]
 
 
 def get_item_id_sold_last():
@@ -245,9 +246,9 @@ def get_item_id_sold_last():
 
 
 def get_sale_date(sale_record):
-    year = int(sale_record[get_column_index("year")])
-    month = int(sale_record[get_column_index("month")])
-    day = int(sale_record[get_column_index("day")])
+    year = int(sale_record[get_column_index_("year")])
+    month = int(sale_record[get_column_index_("month")])
+    day = int(sale_record[get_column_index_("day")])
 
     return (year, month, day)
 
@@ -264,7 +265,7 @@ def get_item_id_sold_last_from_table(table):
     """
 
     last_sale_record = max(table, key=get_sale_date)
-    return last_sale_record[get_column_index("id")]
+    return last_sale_record[get_column_index_("id")]
 
 
 def get_item_title_sold_last_from_table(table):
@@ -279,7 +280,7 @@ def get_item_title_sold_last_from_table(table):
     """
 
     last_sale_record = max(table, key=get_sale_date)
-    return last_sale_record[get_column_index("title")]
+    return last_sale_record[get_column_index_("title")]
 
 
 def get_the_sum_of_prices(item_ids):
@@ -375,7 +376,7 @@ def get_all_customer_ids_from_table(table):
     """
     all_customer_ids = set()
     for record in table:
-        all_customer_ids.add(record[get_column_index('customer_id')])
+        all_customer_ids.add(record[get_column_index_('customer_id')])
     return all_customer_ids
 
 
@@ -412,10 +413,10 @@ def get_all_sales_ids_for_customer_ids_from_table(table):
     all_sales_ids_for_customer_ids = {}
 
     for record in table:
-        all_sales_ids_for_customer_ids.update({record[get_column_index('customer_id')] : []})
+        all_sales_ids_for_customer_ids.update({record[get_column_index_('customer_id')] : []})
 
     for record in table:
-        all_sales_ids_for_customer_ids[record[get_column_index('customer_id')]].append(record[get_column_index('id')])
+        all_sales_ids_for_customer_ids[record[get_column_index_('customer_id')]].append(record[get_column_index_('id')])
 
     return all_sales_ids_for_customer_ids
 
@@ -446,7 +447,7 @@ def get_num_of_sales_per_customer_ids_from_table(table):
     """
     num_of_sales_per_customer_ids = {}
     for sale_record in table:
-        customer_id = table[get_column_index("customer_id")]
+        customer_id = table[get_column_index_("customer_id")]
         if customer_id in num_of_sales_per_customer_ids:
             num_of_sales_per_customer_ids[customer_id] += 1
         else:
