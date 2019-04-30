@@ -69,7 +69,7 @@ def get_the_last_buyer_name():
     Returns:
         str: Customer name of the last buyer
     """
-    id = get_item_id_sold_last()
+    id = sales.get_item_id_sold_last()
     customer_name = crm.get_name_by_id(id)
     return customer_name
 
