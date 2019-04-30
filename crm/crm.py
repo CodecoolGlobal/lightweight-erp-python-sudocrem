@@ -27,7 +27,7 @@ def start_module():
         None
     """
 
-    menu = ['Display table', 'Add', 'Remove', 'Update', 'ID of the longest name', 'Get subscribed emails']
+    menu = ['Display table', 'Add', 'Remove', 'Update', 'ID of the longest name', 'Get subscribed emails', 'Get name by id']
     file_name = 'crm/customers.csv'
     table = data_manager.get_table_from_file(file_name)
     while True:
@@ -50,7 +50,8 @@ def start_module():
             ui.print_result(get_longest_name_id(table), 'ID of the longest name')
         elif crm_input[0] == '6':
             ui.print_result(get_subscribed_emails(table), 'Get subscribed emails')
-        
+        elif crm_input[0] == '7':
+            ui.print_result(get_name_by_id(ui.get_inputs(['ID'], 'Get name by id')[0]), 'Name')
         data_manager.write_table_to_file(file_name, table)
 
 
@@ -186,11 +187,7 @@ def get_name_by_id(id):
         str: the name of the customer
     """
     table = data_manager.get_table_from_file('crm/customers.csv')
-    id_index = 0
-    name_index = 1
-    for record in table:
-        if record[id_index] == id:
-            return record[name_index]
+    return get_name_by_id_from_table(table, id)
 
 
 def get_name_by_id_from_table(table, id):
@@ -205,4 +202,8 @@ def get_name_by_id_from_table(table, id):
         str: the name of the customer
     """
 
-    # your code
+    id_index = 0
+    name_index = 1
+    for record in table:
+        if record[id_index] == id:
+            return record[name_index]

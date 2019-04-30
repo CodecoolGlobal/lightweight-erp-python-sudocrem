@@ -288,8 +288,8 @@ def get_the_sum_of_prices(item_ids):
     Returns:
         number: the sum of the items' prices
     """
-
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_the_sum_of_prices_from_table(table, item_ids) 
 
 
 def get_the_sum_of_prices_from_table(table, item_ids):
@@ -303,8 +303,13 @@ def get_the_sum_of_prices_from_table(table, item_ids):
     Returns:
         number: the sum of the items' prices
     """
-
-    # your code
+    sum_of_prices = 0
+    price_index = 2
+    id_index = 0
+    for record in table:
+        if record[id_index] in item_ids:
+            sum_of_prices += int(record[price_index])
+    return sum_of_prices
 
 
 def get_customer_id_by_sale_id(sale_id):
@@ -319,7 +324,8 @@ def get_customer_id_by_sale_id(sale_id):
          str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_customer_id_by_sale_id_from_table(table, sale_id)
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -334,7 +340,11 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
         str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    customer_id_index = 6
+    sale_id_index = 0
+    for record in table:
+        if record[sale_id_index] == sale_id:
+            return record[customer_id_index]
 
 
 def get_all_customer_ids():
