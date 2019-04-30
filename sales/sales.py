@@ -423,7 +423,8 @@ def get_num_of_sales_per_customer_ids():
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_num_of_sales_per_customer_ids_from_table(table)
 
 
 def get_num_of_sales_per_customer_ids_from_table(table):
