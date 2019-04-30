@@ -274,7 +274,8 @@ def get_item_title_sold_last_from_table(table):
         str: the _title_ of the item that was sold most recently.
     """
 
-    # your code
+    last_sale_record = max(table, key=get_sale_date)
+    return last_sale_record[get_column_index("title")]
 
 
 def get_the_sum_of_prices(item_ids):
