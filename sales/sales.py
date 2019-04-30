@@ -208,8 +208,8 @@ def get_title_by_id(id):
         str: the title of the item
     """
     
-    table = data_manager.get_table_from_file('sales.csv')
-    get_title_by_id(table, id)
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_title_by_id_from_table(table, id)
 
 
 def get_title_by_id_from_table(table, id):
@@ -224,12 +224,11 @@ def get_title_by_id_from_table(table, id):
     Returns:
         str: the title of the item
     """
-    for row in table:
-        for id in row:
-            if row[0] == id:
-                return row[1]
 
-    
+    for record in table:
+        if record[get_column_index('id')] == id:
+            return record[get_column_index('title')]
+
 
 def get_item_id_sold_last():
     """
