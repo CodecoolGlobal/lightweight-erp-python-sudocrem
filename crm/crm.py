@@ -167,8 +167,6 @@ def get_subscribed_emails(table):
     return subscribed_emails
 
 
-<<<<<<< HEAD
-=======
     # your code
 
 
@@ -205,4 +203,3 @@ def get_name_by_id_from_table(table, id):
     """
 
     # your code
->>>>>>> remotes/origin/week2

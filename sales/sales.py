@@ -157,7 +157,6 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         list: list of lists (the filtered table)
     """
 
-<<<<<<< HEAD
     month_index = 3
     day_index = 4
     year_index = 5
@@ -183,7 +182,6 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
             filtered_record[index] = int(filtered_record[index])
      
     return filtered_records
-=======
     # your code
 
 
@@ -404,4 +402,3 @@ def get_num_of_sales_per_customer_ids_from_table(table):
     """
 
     # your code
->>>>>>> remotes/origin/week2
