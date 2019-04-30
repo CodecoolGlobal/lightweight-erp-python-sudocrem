@@ -188,9 +188,9 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 # functions supports data abalyser
 # --------------------------------
 
-def get_column_index(table, column_name):
+def get_column_index(column_name):
     columns = ("id", "title", "price", "month", "day", "year", "customer_id")
-    return table.index(column_name)
+    return columns.index(column_name)
 
 
 def get_title_by_id(id):
