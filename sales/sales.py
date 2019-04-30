@@ -205,8 +205,12 @@ def get_title_by_id(id):
     Returns:
         str: the title of the item
     """
-
-    # your code
+    table = data_manager.get_table_from_file
+    id = ui.get_inputs
+    for id in table:
+        if table[0] == id:
+            return table[1]
+            
 
 
 def get_title_by_id_from_table(table, id):
@@ -355,7 +359,8 @@ def get_all_customer_ids():
          set of str: set of customer_ids that are present in the table
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_all_customer_ids_from_table(table)
 
 
 def get_all_customer_ids_from_table(table):
@@ -367,8 +372,10 @@ def get_all_customer_ids_from_table(table):
     Returns:
          set of str: set of customer_ids that are present in the table
     """
-
-    # your code
+    all_customer_ids = set()
+    for record in table:
+        all_customer_ids.add(record[get_column_index('customer_id')])
+    return all_customer_ids
 
 
 def get_all_sales_ids_for_customer_ids():
