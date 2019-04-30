@@ -188,6 +188,10 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 # functions supports data abalyser
 # --------------------------------
 
+def get_column_index(column_name):
+    columns = ("id", "title", "price", "month", "day", "year", "customer_id")
+    return columns.index(column_name)
+
 
 def get_title_by_id(id):
 
@@ -234,7 +238,18 @@ def get_item_id_sold_last():
         str: the _id_ of the item that was sold most recently.
     """
 
-    # your code
+    file_name = 'sales/sales.csv'
+    table = data_manager.get_table_from_file(file_name)
+
+    return get_item_id_sold_last_from_table(table)
+
+
+def get_sale_date(sale_record):
+    year = int(sale_record[get_column_index("year")])
+    month = int(sale_record[get_column_index("month")])
+    day = int(sale_record[get_column_index("day")])
+
+    return (year, month, day)
 
 
 def get_item_id_sold_last_from_table(table):
@@ -248,7 +263,8 @@ def get_item_id_sold_last_from_table(table):
         str: the _id_ of the item that was sold most recently.
     """
 
-    # your code
+    last_sale_record = max(table, key=get_sale_date)
+    return last_sale_record[get_column_index("id")]
 
 
 def get_item_title_sold_last_from_table(table):
@@ -312,7 +328,8 @@ def get_customer_id_by_sale_id(sale_id):
          str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_customer_id_by_sale_id_from_table(table, sale_id)
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -327,7 +344,11 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
         str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    customer_id_index = 6
+    sale_id_index = 0
+    for record in table:
+        if record[sale_id_index] == sale_id:
+            return record[customer_id_index]
 
 
 def get_all_customer_ids():
@@ -338,7 +359,8 @@ def get_all_customer_ids():
          set of str: set of customer_ids that are present in the table
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_all_customer_ids_from_table(table)
 
 
 def get_all_customer_ids_from_table(table):
@@ -350,8 +372,10 @@ def get_all_customer_ids_from_table(table):
     Returns:
          set of str: set of customer_ids that are present in the table
     """
-
-    # your code
+    all_customer_ids = set()
+    for record in table:
+        all_customer_ids.add(record[get_column_index('customer_id')])
+    return all_customer_ids
 
 
 def get_all_sales_ids_for_customer_ids():
