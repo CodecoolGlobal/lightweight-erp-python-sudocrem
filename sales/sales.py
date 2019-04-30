@@ -355,7 +355,8 @@ def get_all_customer_ids():
          set of str: set of customer_ids that are present in the table
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_all_customer_ids_from_table(table)
 
 
 def get_all_customer_ids_from_table(table):
@@ -367,8 +368,10 @@ def get_all_customer_ids_from_table(table):
     Returns:
          set of str: set of customer_ids that are present in the table
     """
-
-    # your code
+    all_customer_ids = set()
+    for record in table:
+        all_customer_ids.add(record[get_column_index('customer_id')])
+    return all_customer_ids
 
 
 def get_all_sales_ids_for_customer_ids():
