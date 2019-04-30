@@ -68,7 +68,7 @@ def show_table(table):
         None
     """
 
-    title_list = ['ID', 'Title', 'Price', 'Month', 'Day', 'Year']
+    title_list = ['ID', 'Title', 'Price', 'Month', 'Day', 'Year', 'Customer ID']
     common.show_table(table, title_list)
 
 
@@ -83,7 +83,7 @@ def add(table):
         list: Table with a new record
     """
 
-    title_list = ['Title:', 'Price:', 'Month:', 'Day:', 'Year:']
+    title_list = ['Title:', 'Price:', 'Month:', 'Day:', 'Year:', 'Customer ID:']
     return common.add(table, title_list)
 
 
@@ -114,7 +114,7 @@ def update(table, id_):
         list: table with updated record
     """
 
-    title_list = ['Title', 'Price', 'Month', 'Day', 'Year']
+    title_list = ['Title', 'Price', 'Month', 'Day', 'Year', 'Customer ID']
     return common.update(table, id_, title_list)
 
 
