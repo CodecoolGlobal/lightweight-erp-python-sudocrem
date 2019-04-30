@@ -436,5 +436,11 @@ def get_num_of_sales_per_customer_ids_from_table(table):
      Returns:
          dict of (key, value): (customer_id (str), num_of_sales (number))
     """
-
-    # your code
+    num_of_sales_per_customer_ids = {}
+    for sale_record in table:
+        customer_id = table[get_column_index("customer_id")]
+        if customer_id in num_of_sales_per_customer_ids:
+            num_of_sales_per_customer_ids[customer_id] += 1
+        else:
+            num_of_sales_per_customer_ids[customer_id] = 0
+    return num_of_sales_per_customer_ids
