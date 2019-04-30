@@ -308,7 +308,8 @@ def get_customer_id_by_sale_id(sale_id):
          str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    return get_customer_id_by_sale_id_from_table(table, sale_id)
 
 
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -323,7 +324,11 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
         str: customer_id that belongs to the given sale id
     """
 
-    # your code
+    customer_id_index = 6
+    sale_id_index = 0
+    for record in table:
+        if record[sale_id_index] == sale_id:
+            return record[customer_id_index]
 
 
 def get_all_customer_ids():
