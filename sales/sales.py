@@ -230,7 +230,10 @@ def get_item_id_sold_last():
         str: the _id_ of the item that was sold most recently.
     """
 
-    # your code
+    file_name = 'sales/sales.csv'
+    table = data_manager.get_table_from_file(file_name)
+
+    return get_item_id_sold_last_from_table(table)
 
 
 def get_item_id_sold_last_from_table(table):
