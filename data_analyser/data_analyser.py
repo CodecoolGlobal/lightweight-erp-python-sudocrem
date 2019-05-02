@@ -112,7 +112,7 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
     all_sales_ids_for_customer_ids = sales.get_all_sales_ids_for_customer_ids()
     most_money_spent = 0
 
-    for customer_id, sale_ids in all_sales_ids_for_customer_ids:
+    for customer_id, sale_ids in all_sales_ids_for_customer_ids.items():
         money_spent_per_buyer = sales.get_the_sum_of_prices(sale_ids)
         if money_spent_per_buyer > most_money_spent:
             customer_id_spent_most = customer_id
