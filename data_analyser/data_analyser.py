@@ -13,6 +13,7 @@ import ui
 import common
 from sales import sales
 from crm import crm
+from store import store
 
 
 def start_module():
@@ -29,7 +30,8 @@ def start_module():
                "Customer's name who spent most & amount",
                "Customer's ID who spent most & amount",
                "Most frequent buyers names",
-               "Most frequent buyers ID's"
+               "Most frequent buyers ID's",
+               "Get turnover rate for each game"
                ]
 
     while True:
@@ -49,6 +51,8 @@ def start_module():
             ui.print_result(get_the_most_frequent_buyers_names(), "Most frequent buyers names")
         elif option == "6":
             ui.print_result(get_the_most_frequent_buyers_ids(), "Most frequent buyers ID's")
+        elif option == '7':
+            ui.print_table(list(zip(get_turnover_rate_for_each_game().keys(), get_turnover_rate_for_each_game().values())), ['Game', 'Turnover rate'])
         elif option == "0":
             return None
         else:
@@ -143,3 +147,20 @@ def get_the_most_frequent_buyers_ids(num=1):
     """
 
     # your code
+
+
+def get_turnover_rate_for_each_game():
+    # game : turnover rate
+    turnover_rates = {}
+    all_games_ids = store.get_all_games_ids()
+
+    for game_id in all_games_ids:
+        num_of_sales = sales.get_num_of_sales_by_id(game_id)
+        stock = store.get_stock_by_id(game_id)
+        try:
+            turnover_rate = num_of_sales / stock
+        except ZeroDivisionError:
+            turnover_rate = 0
+        turnover_rate = round(turnover_rate, 3)
+        turnover_rates.update({store.get_name_by_id(game_id) : turnover_rate})
+    return turnover_rates

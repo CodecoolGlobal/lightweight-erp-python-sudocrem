@@ -159,10 +159,29 @@ def get_average_by_manufacturer(table, manufacturer):
 
 # functions supports turnover rate
 # --------------------------------
+
 def get_stock_by_id(id):
-    games = data_manager.get_table_from_file('games.csv')
+    games = data_manager.get_table_from_file('store/games.csv')
     stock_index = 4
     id_index = 0
     for record in games:
         if record[id_index] == id:
-            return record[stock_index]
+            return int(record[stock_index])
+
+
+def get_all_games_ids():
+    games = data_manager.get_table_from_file('store/games.csv')
+    id_index = 0
+    all_games_ids = []
+    for game in games:
+        all_games_ids.append(game[id_index])
+    return all_games_ids
+
+
+def get_name_by_id(id):
+    games = data_manager.get_table_from_file('store/games.csv')
+    id_index = 0
+    title_index = 1
+    for game in games:
+        if game[id_index] == id:
+            return game[title_index]
