@@ -460,7 +460,7 @@ def get_num_of_sales_per_customer_ids_from_table(table):
 
 
 def get_title_by_id(id):
-    sales = data_manager.get_table_from_file('sales.csv')
+    sales = data_manager.get_table_from_file('sales/sales.csv')
     title_index = 1
     id_index = 0
     for record in sales:
@@ -469,7 +469,7 @@ def get_title_by_id(id):
 
 
 def get_year_by_id(id):
-    sales = data_manager.get_table_from_file('sales.csv')
+    sales = data_manager.get_table_from_file('sales/sales.csv')
     year_index = 5
     id_index = 0
     for record in sales:

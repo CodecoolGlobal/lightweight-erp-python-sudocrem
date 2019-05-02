@@ -215,7 +215,9 @@ def get_name_by_id(id):
     name_index = 1
     for record in table:
         if record[id_index] == id:
-            return record[name_index] 
+            return record[name_index]
+
+
 def get_all_ids():
     """
     Reads the customers table with the help of the data_manager module.

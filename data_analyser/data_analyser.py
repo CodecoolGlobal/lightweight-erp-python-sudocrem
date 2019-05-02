@@ -157,7 +157,13 @@ def get_the_most_frequent_buyers_ids(num=1):
             The first one bought the most frequent. eg.: [(aH34Jq#&, 8), (bH34Jq#&, 3)]
     """
 
-    # your code
+    all_sales_ids_for_customer_ids = list(zip(sales.get_all_sales_ids_for_customer_ids().keys(),  sales.get_all_sales_ids_for_customer_ids().values()))
+
+    for index, item in enumerate(all_sales_ids_for_customer_ids):
+        item = list(item)
+        item[1] = len(item[1])
+        all_sales_ids_for_customer_ids[index] = tuple(item)
+    return all_sales_ids_for_customer_ids[:num]
 
 
 def get_turnover_rate_for_each_game():
