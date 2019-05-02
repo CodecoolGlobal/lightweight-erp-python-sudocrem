@@ -1,11 +1,59 @@
 """ User Interface (UI) module """
 
+
 def get_summa(list):
     sum_ = 0
     for element in list:
         sum_ += int(element)
     return sum_
 
+
+def get_longest_elements_of_each_column_in_a_table(table, column_headers):
+    columns = len(column_headers)
+    longest_elements = [0] * columns
+
+    for column_index in range(columns):
+        max_column_length = 0
+        for line in table:
+            column_element = line[column_index]
+            if len(column_element) > max_column_length:
+                max_column_length = len(column_element)
+        
+        # Handle long headers
+        if max_column_length < len(column_headers[column_index]):
+            longest_elements[column_index] = len(column_headers[column_index])
+        else:
+            longest_elements[column_index] = max_column_length
+    return longest_elements
+
+
+def get_separator(longest_elements, number_of_columns):
+    number_of_separators = get_summa(longest_elements) + number_of_columns * 5 - 1
+    return number_of_separators * '-'
+
+
+def get_header(separator):
+    return f"/{separator}\\"
+
+
+def get_footer(separator):
+    return f"\\{separator}/"
+
+
+def get_middle_separator(longest_elements):
+    middle_lines = []
+    for column in longest_elements:
+        separator_width = 4
+        middle_line = '-' * (column + separator_width)
+        middle_lines.append(middle_line)
+    return f"|{'|'.join(middle_lines)}|"
+
+
+def get_centered_line(line, longest_elements):
+    centered_line = []
+    for index, element in enumerate(line):
+        centered_line.append(element.center(longest_elements[index], ' '))
+    return (f"|  {'  |  '.join(centered_line)}  |")
 
 
 def print_table(table, title_list):
@@ -28,49 +76,22 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-    # Get longest elements of each column
-    columns = len(table[0])
-    longest_elements = [0] * columns
-    for column in range(columns):
-        max_column_length = 0
-        for line in table:
-            column_element = line[column]
-            if len(column_element) > max_column_length:
-                max_column_length = len(column_element)
-        # Handle long headers
-        if max_column_length < len(title_list[column]):
-            longest_elements[column] = len(title_list[column])
-        else:
-            longest_elements[column] = max_column_length
-    # Calculate opening and closing string
-    opening_string = f"/{'-' * (get_summa(longest_elements) + columns * 5 - 1)}\\"
-    closing_string = f"\\{'-' * (get_summa(longest_elements) + columns * 5 - 1)}/"
-    # Create seperating lines
-    sep_lines = []
-    for column in longest_elements:
-        sep_lines.append('-'*(column + 4))
-    # Print table
-    # Print headers
-    print(opening_string)
-    headers = []
-    for index, element in enumerate(title_list):
-        # Add centered element to list
-        headers.append(element.center(longest_elements[index], ' '))
-    print(f"|  {'  |  '.join(headers)}  |")
-    print(f"|{'|'.join(sep_lines)}|")
-    # Print body
+
+    number_of_columns = len(title_list)
+    longest_elements = get_longest_elements_of_each_column_in_a_table(table, title_list)
+    separator = get_separator(longest_elements, number_of_columns)
+    header = get_header(separator)
+    footer = get_footer(separator)
+    middle_separator = get_middle_separator(longest_elements)
+
+    print(header)
+    print(get_centered_line(title_list, longest_elements))
     for line in table:
-        centered_line = []
-        for index, element in enumerate(line):
-            # Add centered element to list
-            centered_line.append(element.center(longest_elements[index], ' '))
-        print(f"|  {'  |  '.join(centered_line)}  |")
-        # Break on last element
+        print(middle_separator)
+        print(get_centered_line(line, longest_elements))
         if line == table[-1]:
             break
-        print(f"|{'|'.join(sep_lines)}|")
-    # Print footer
-    print(closing_string)
+    print(footer)
     print()
 
 
