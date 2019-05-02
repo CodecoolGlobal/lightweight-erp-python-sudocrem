@@ -15,10 +15,10 @@ def get_longest_elements_of_each_column_in_a_table(table, column_headers):
     for column_index in range(columns):
         max_column_length = 0
         for line in table:
-            column_element = line[column_index]
+            column_element = str(line[column_index])
             if len(column_element) > max_column_length:
                 max_column_length = len(column_element)
-        
+
         # Handle long headers
         if max_column_length < len(column_headers[column_index]):
             longest_elements[column_index] = len(column_headers[column_index])
@@ -52,6 +52,7 @@ def get_middle_separator(longest_elements):
 def get_centered_line(line, longest_elements):
     centered_line = []
     for index, element in enumerate(line):
+        element = str(element)
         centered_line.append(element.center(longest_elements[index], ' '))
     return (f"|  {'  |  '.join(centered_line)}  |")
 

@@ -13,6 +13,7 @@ import ui
 import common
 from sales import sales
 from crm import crm
+from store import store
 
 
 def start_module():
@@ -30,6 +31,7 @@ def start_module():
                "Customer's ID who spent most & amount",
                "Most frequent buyers names",
                "Most frequent buyers ID's",
+               "Get turnover rate for each game",
                "Customer's names who did not buy anything",
                "Customer's IDs who did not buy anything"
                ]
@@ -51,9 +53,11 @@ def start_module():
             ui.print_result(get_the_most_frequent_buyers_names(), "Most frequent buyers names")
         elif option == "6":
             ui.print_result(get_the_most_frequent_buyers_ids(), "Most frequent buyers ID's")
-        elif option == "7":
-            ui.print_result(get_not_buying_customers_names(), "Customer's names who did not buy anything")
+        elif option == '7':
+            ui.print_table(list(zip(get_turnover_rate_for_each_game().keys(), get_turnover_rate_for_each_game().values())), ['Game', 'Turnover rate'])
         elif option == "8":
+            ui.print_result(get_not_buying_customers_names(), "Customer's names who did not buy anything")
+        elif option == "9":
             ui.print_result(get_not_buying_customers_ids(), "Customer's IDs who did not buy anything")
         elif option == "0":
             return None
@@ -153,6 +157,24 @@ def get_the_most_frequent_buyers_ids(num=1):
             The first one bought the most frequent. eg.: [(aH34Jq#&, 8), (bH34Jq#&, 3)]
     """
 
+    # your code
+
+
+def get_turnover_rate_for_each_game():
+    # game : turnover rate
+    turnover_rates = {}
+    all_games_ids = store.get_all_games_ids()
+
+    for game_id in all_games_ids:
+        num_of_sales = sales.get_num_of_sales_by_id(game_id)
+        stock = store.get_stock_by_id(game_id)
+        try:
+            turnover_rate = num_of_sales / stock
+        except ZeroDivisionError:
+            turnover_rate = 0
+        turnover_rate = round(turnover_rate, 3)
+        turnover_rates.update({store.get_name_by_id(game_id) : turnover_rate})
+    return turnover_rates
     return list(sales.get_num_of_sales_per_customer_ids().items())[:num]
 
 

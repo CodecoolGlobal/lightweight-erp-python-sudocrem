@@ -454,3 +454,52 @@ def get_num_of_sales_per_customer_ids_from_table(table):
         else:
             num_of_sales_per_customer_ids[customer_id] = 1
     return num_of_sales_per_customer_ids
+
+# functions supports turnover rate
+# --------------------------------
+
+
+def get_title_by_id(id):
+    sales = data_manager.get_table_from_file('sales.csv')
+    title_index = 1
+    id_index = 0
+    for record in sales:
+        if record[id_index] == id:
+            return record[title_index] 
+
+
+def get_year_by_id(id):
+    sales = data_manager.get_table_from_file('sales.csv')
+    year_index = 5
+    id_index = 0
+    for record in sales:
+        if record[id_index] == id:
+            return record[year_index]
+
+
+def get_month_by_id(id):
+    sales = data_manager.get_table_from_file('sales/sales.csv')
+    month_index = 3
+    id_index = 0
+    for record in sales:
+        if record[id_index] == id:
+            return record[month_index]
+
+
+def get_day_by_id(id):
+    sales = data_manager.get_table_from_file('sales/sales.csv')
+    day_index = 4
+    id_index = 0
+    for record in sales:
+        if record[id_index] == id:
+            return record[day_index]
+
+
+def get_num_of_sales_by_id(id):
+    num_of_sales = 0
+    id_index = 0
+    sales = data_manager.get_table_from_file('sales/sales.csv')
+    for record in sales:
+        if record[id_index] == id:
+            num_of_sales += 1
+    return num_of_sales
