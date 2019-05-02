@@ -15,39 +15,6 @@ from sales import sales
 from crm import crm
 
 
-def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        get_the_last_buyer_name()
-    elif option == "2":
-        get_the_last_buyer_id()
-    elif option == "3":
-        get_the_buyer_name_spent_most_and_the_money_spent()
-    elif option == "4":
-        get_the_buyer_id_spent_most_and_the_money_spent()
-    elif option == "5":
-        get_the_most_frequent_buyers_names()
-    elif option == "6":
-        get_the_most_frequent_buyers_ids()
-    elif option == "0":
-        return None
-    else:
-        raise KeyError("There is no such option.")
-
-
-def handle_menu():
-    options = ["Store manager",
-               "Human resources manager",
-               "Inventory manager",
-               "Accounting manager",
-               "Sales manager",
-               "Customer Relationship Management (CRM)",
-               "Data analyzer"]
-
-    ui.print_menu("Main menu", options, "Exit program")
-
-
 def start_module():
     """
     Starts this module and displays its menu.
@@ -57,9 +24,42 @@ def start_module():
     Returns:
         None
     """
-    handle_menu()
-    go_to_menu = choose
-    return go_to_menu
+    options = ["Last buyer's name",
+               "Last buyer's ID",
+               "Customer's name who spent most & amount",
+               "Customer's ID who spent most & amount",
+               "Most frequent buyers names",
+               "Most frequent buyers ID's",
+               "Customer's names who did not buy anything",
+               "Customer's IDs who did not buy anything"
+               ]
+
+    while True:
+        ui.print_menu("Data analyser menu", options, "Go back to main")
+        
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            ui.print_result(get_the_last_buyer_name(), "Last buyer's name")
+        elif option == "2":
+            ui.print_result(get_the_last_buyer_id(), "Last buyer's ID")
+        elif option == "3":
+            ui.print_result(get_the_buyer_name_spent_most_and_the_money_spent(), "Customer's name who spent most & amount")
+        elif option == "4":
+            ui.print_result(get_the_buyer_id_spent_most_and_the_money_spent(), "Customer's ID who spent most & amount")
+        elif option == "5":
+            ui.print_result(get_the_most_frequent_buyers_names(), "Most frequent buyers names")
+        elif option == "6":
+            ui.print_result(get_the_most_frequent_buyers_ids(), "Most frequent buyers ID's")
+        elif option == "7":
+            ui.print_result(get_not_buying_customers_names(), "Customer's names who did not buy anything")
+        elif option == "8":
+            ui.print_result(get_not_buying_customers_ids(), "Customer's IDs who did not buy anything")
+        elif option == "0":
+            return None
+        else:
+            raise KeyError("There is no such option.")
+
 
 
 def get_the_last_buyer_name():
@@ -154,5 +154,27 @@ def get_the_most_frequent_buyers_ids(num=1):
     """
 
     return list(sales.get_num_of_sales_per_customer_ids().items())[:num]
-     
 
+
+def get_not_buying_customers_names():
+    """
+    Returns the names of customers who did not buy anything yet.
+
+    Returns:
+        list of strings: names
+    """
+    not_buyer_ids = get_not_buying_customers_ids()
+    return [crm.get_name_by_id(not_buyer_id) for not_buyer_id in not_buyer_ids]
+
+
+def get_not_buying_customers_ids():
+    """
+    Returns the ids of customers who did not buy anything yet.
+
+    Returns:
+        list of strings: customer ids
+    """
+    all_customer_ids = crm.get_all_ids()
+    buyers_ids = sales.get_all_customer_ids()
+    not_buyers = all_customer_ids - buyers_ids
+    return list(not_buyers)
