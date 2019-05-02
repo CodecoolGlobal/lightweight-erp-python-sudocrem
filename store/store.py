@@ -27,8 +27,7 @@ def start_module():
     Returns:
         None
     """
-   
-   
+
     table = data_manager.get_table_from_file('store/games.csv')
     options = ["Display table",
                "Add to table",
@@ -36,9 +35,9 @@ def start_module():
                "Update table",
                "Count by manufactureres",
                "Average by manufacturer"]
-    
+
     while True:
-        ui.print_menu("Store manager", options, "Exit program")
+        ui.print_menu("Store manager", options, "Go back to main")
         inputs = ui.get_inputs(["Please enter a number: "], "")
         option = inputs[0]
         if option == "1":
@@ -53,7 +52,7 @@ def start_module():
             common.update(table, ui.get_inputs(['ID'], '')[0], title_list)
             data_manager.write_table_to_file('store/games.csv', table)
         elif option == "0":
-            sys.exit(0)
+            return None
         else:
             raise KeyError("There is no such option.")
 
