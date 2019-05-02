@@ -132,8 +132,17 @@ def get_the_most_frequent_buyers_names(num=1):
         list of tuples: Ordered list of tuples of customer names and num of sales
             The first one bought the most frequent. eg.: [('Genoveva Dingess', 8), ('Missy Stoney', 3)]
     """
+    # maxot lehet használni?
+    
+    customers_ands_all_sales = sales.get_all_sales_ids_for_customer_ids
+    quantity_of_sales = []
+    for sales in customers_ands_all_sales.values():
+        if 
+        quantity_of_sales.append(len(sales))
 
-    sales.get_customer_id_by_sale_id()
+
+        
+    
 
 
 def get_the_most_frequent_buyers_ids(num=1):
