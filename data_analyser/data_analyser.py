@@ -30,6 +30,7 @@ def start_module():
                "Customer's ID who spent most & amount",
                "Most frequent buyers names",
                "Most frequent buyers ID's",
+               "Customer's names who did not buy anything",
                "Customer's IDs who did not buy anything"
                ]
 
@@ -51,6 +52,8 @@ def start_module():
         elif option == "6":
             ui.print_result(get_the_most_frequent_buyers_ids(), "Most frequent buyers ID's")
         elif option == "7":
+            ui.print_result(get_not_buying_customers_names(), "Customer's names who did not buy anything")
+        elif option == "8":
             ui.print_result(get_not_buying_customers_ids(), "Customer's IDs who did not buy anything")
         elif option == "0":
             return None
@@ -148,9 +151,23 @@ def get_the_most_frequent_buyers_ids(num=1):
     # your code
 
 
+def get_not_buying_customers_names():
+    """
+    Returns the names of customers who did not buy anything yet.
+
+    Returns:
+        list of strings: names
+    """
+    not_buyer_ids = get_not_buying_customers_ids()
+    return [crm.get_name_by_id(not_buyer_id) for not_buyer_id in not_buyer_ids]
+
+
 def get_not_buying_customers_ids():
     """
     Returns the ids of customers who did not buy anything yet.
+
+    Returns:
+        list of strings: customer ids
     """
     all_customer_ids = crm.get_all_ids()
     buyers_ids = sales.get_all_customer_ids()
