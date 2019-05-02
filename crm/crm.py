@@ -207,3 +207,27 @@ def get_name_by_id_from_table(table, id):
     for record in table:
         if record[id_index] == id:
             return record[name_index]
+
+
+def get_all_ids():
+    """
+    Reads the customers table with the help of the data_manager module.
+
+    Returns:
+         set of str: set of ids that are present in the table
+    """
+
+    table = data_manager.get_table_from_file('crm/customers.csv')
+    return get_all_ids_from_table(table)
+
+
+def get_all_ids_from_table(table):
+    """
+    Returns a set of ids that are present in the table.
+
+    Args:
+        table (list of list): the customers table
+    Returns:
+        set of str: set of ids that are present in the table
+    """
+    return {customer[0] for customer in table}
