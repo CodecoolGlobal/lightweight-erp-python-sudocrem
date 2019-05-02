@@ -15,39 +15,6 @@ from sales import sales
 from crm import crm
 
 
-def choose():
-    inputs = ui.get_inputs(["Please enter a number: "], "")
-    option = inputs[0]
-    if option == "1":
-        get_the_last_buyer_name()
-    elif option == "2":
-        get_the_last_buyer_id()
-    elif option == "3":
-        get_the_buyer_name_spent_most_and_the_money_spent()
-    elif option == "4":
-        get_the_buyer_id_spent_most_and_the_money_spent()
-    elif option == "5":
-        get_the_most_frequent_buyers_names()
-    elif option == "6":
-        get_the_most_frequent_buyers_ids()
-    elif option == "0":
-        return None
-    else:
-        raise KeyError("There is no such option.")
-
-
-def handle_menu():
-    options = ["Store manager",
-               "Human resources manager",
-               "Inventory manager",
-               "Accounting manager",
-               "Sales manager",
-               "Customer Relationship Management (CRM)",
-               "Data analyzer"]
-
-    ui.print_menu("Main menu", options, "Exit program")
-
-
 def start_module():
     """
     Starts this module and displays its menu.
@@ -57,9 +24,36 @@ def start_module():
     Returns:
         None
     """
-    handle_menu()
-    go_to_menu = choose
-    return go_to_menu
+    options = ["Last buyer's name",
+               "Last buyer's ID",
+               "Customer's name who spent most & amount",
+               "Customer's ID who spent most & amount",
+               "Most frequent buyers names",
+               "Most frequent buyers ID's"
+               ]
+
+    while True:
+        ui.print_menu("Data analyser menu", options, "Go back to main")
+        
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            ui.print_result(get_the_last_buyer_name(), "Last buyer's name")
+        elif option == "2":
+            ui.print_result(get_the_last_buyer_id(), "Last buyer's ID")
+        elif option == "3":
+            ui.print_result(get_the_buyer_name_spent_most_and_the_money_spent(), "Customer's name who spent most & amount")
+        elif option == "4":
+            ui.print_result(get_the_buyer_id_spent_most_and_the_money_spent(), "Customer's ID who spent most & amount")
+        elif option == "5":
+            ui.print_result(get_the_most_frequent_buyers_names(), "Most frequent buyers names")
+        elif option == "6":
+            ui.print_result(get_the_most_frequent_buyers_ids(), "Most frequent buyers ID's")
+        elif option == "0":
+            return None
+        else:
+            raise KeyError("There is no such option.")
+
 
 
 def get_the_last_buyer_name():
