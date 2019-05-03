@@ -65,7 +65,6 @@ def start_module():
             raise KeyError("There is no such option.")
 
 
-
 def get_the_last_buyer_name():
     """
     Returns the customer _name_ of the customer made sale last.
@@ -144,6 +143,7 @@ def get_the_most_frequent_buyers_names(num=1):
 
     return most_frequent_buyers_names
 
+
 def get_the_most_frequent_buyers_ids(num=1):
     """
     Returns 'num' number of buyers (more precisely: the customer ids of them) who bought more frequent in an
@@ -180,7 +180,7 @@ def get_turnover_rate_for_each_game():
         except ZeroDivisionError:
             turnover_rate = 0
         turnover_rate = round(turnover_rate, 3)
-        turnover_rates.update({store.get_name_by_id(game_id) : turnover_rate})
+        turnover_rates.update({store.get_name_by_id(game_id): turnover_rate})
     return turnover_rates
 
 
