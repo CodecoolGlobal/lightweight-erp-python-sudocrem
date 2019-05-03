@@ -164,6 +164,7 @@ def get_the_most_frequent_buyers_ids(num=1):
         item[1] = len(item[1])
         all_sales_ids_for_customer_ids[index] = tuple(item)
     return all_sales_ids_for_customer_ids[:num]
+    # return list(sales.get_num_of_sales_per_customer_ids().items())[:num]
 
 
 def get_turnover_rate_for_each_game():
@@ -181,7 +182,6 @@ def get_turnover_rate_for_each_game():
         turnover_rate = round(turnover_rate, 3)
         turnover_rates.update({store.get_name_by_id(game_id) : turnover_rate})
     return turnover_rates
-    return list(sales.get_num_of_sales_per_customer_ids().items())[:num]
 
 
 def get_not_buying_customers_names():
